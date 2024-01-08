@@ -1,0 +1,247 @@
+
+@font-face {
+  font-family: Grestal;
+  src: url("../assets/fonts/grestal_script/Grestal\ Script\ Demo.ttf");
+}
+
+@font-face {
+  font-family: Cream;
+  src: url("../assets/fonts/cream_cake/Cream\ Cake.otf");
+}
+
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.quote {
+  /* margin: 20px 0; */
+  font-family: Cream;
+  margin-top: 0px;
+  font-size: 2rem;
+  text-transform: capitalize;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra con contraste */
+  background-color: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente */
+
+  font-weight: lighter;
+}
+
+.container {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+
+  position: relative;
+}
+
+.quoteImg {
+  width: 100%;
+  height: 100vh;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  position: relative;
+
+}
+
+.quoteImg::before {
+  content: '';
+  
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  
+  background-color: rgba(0, 0, 0, 0.527);
+}
+
+
+.image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  width: 1200px;
+  height: 627px;
+  
+  /* max-width: 100%; */
+  max-height: 627px;
+  margin: 20px 0;
+
+  position: relative;
+  backdrop-filter: blur(10px);
+
+  border: 5px solid rgba(255, 255, 255, 0.774);
+  border-radius: 5px;
+}
+
+
+/*****************FORM*/
+.form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.form__input{
+  all: initial;
+  background-color: white;
+  border: 0;
+
+  height: 35px;
+
+  box-shadow: 6px 10px 22px 5px rgba(0,0,0,0.75);
+}
+.form__input--text{
+  width: 300px;
+  border-radius: 10px 0px 0px 10px;
+  padding-left: 5px;
+
+  font-family: Cream;
+  font-size: 1.5rem;
+
+}
+.form__input--submit{
+  width: 40px;
+  border-radius: 0px 10px 10px 0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*****************END FORM*/
+
+
+
+
+/*****************EDIT*/
+.edit{
+  all: initial;
+  position: absolute;
+
+  bottom: 30px;
+  right: 20px;
+
+  color: rgb(255, 255, 255);
+  font-size: 2.5rem;
+
+  background-color: transparent;
+  transition: all 1s;
+
+  z-index: 3;
+}
+.editOpener{
+  transform: translateX(100%);
+}
+/*****************END EDIT*/
+
+
+/*****************IMAGECOLLECTOR*/
+.imageCollector{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  overflow-y: scroll;
+
+  height: 90%;
+}
+.imageCollector__img{
+  width: 30%;
+  border: 2px solid;
+  border-color: --;
+  margin: 10px 0px;
+}
+/*****************END IMAGECOLLECTOR*/
+
+/*********OPENER*/
+.opener{
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 100%;
+  height: 100%;
+  background-color: rgb(46, 45, 53);
+
+  transform: translateX(0);
+  transition: all 1s;
+}
+.dNone{
+  display: none;
+}
+
+.showLateral{
+  animation: showLateral 1s forwards;
+}
+.unshowLateral{
+  animation: unshowLateral 1s forwards;
+}
+
+.moveEdit{
+  animation: moveEdit 1s forwards;
+}
+.unmoveEdit{
+  animation: unmoveEdit 1s forwards;
+}
+
+@keyframes showLateral {
+  
+  from{
+    opacity: 0;
+    right: -500px;
+  }
+  to{
+    opacity: 100%;
+    right: 0;
+  }
+}
+@keyframes unshowLateral {
+  
+  to{
+    opacity: 0;
+    right: -500px;
+    display: none;
+  }
+}
+
+@keyframes moveEdit {
+  
+  from{
+    right: 30px;
+  }
+  to{
+    right: 20px;
+  }
+}
+@keyframes unmoveEdit {
+  
+  to{
+    right: 20px;
+  }
+}
+/*********END OPENER*/
+
+
+
+/*********HISTORIAL*/
+
+#historialList {
+  list-style-type: none;
+  padding: 0;
+}
+
+#historialList li {
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+/*********END HISTORIAL*/
+

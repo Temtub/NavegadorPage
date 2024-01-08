@@ -2,8 +2,8 @@ import { Imagen } from "../js/Imagen.js"
 
 let historial = JSON.parse(localStorage.getItem("historial")) || []
 const historialSize = 5
-let historialList
 
+let historialList = document.getElementById("historialList")
 let button = document.getElementById("button")
 let image = document.getElementById("image")
 let quote = document.getElementById("quote")
@@ -31,7 +31,7 @@ async function cargarImagenes() {
 
     const pexelsResponse = await fetch(`https://api.pexels.com/v1/search?query=landscape&per_page=800`, {
         headers: {
-            "Authorization": '',
+            "Authorization": 'Mf17YqB37QBAIr12LlJltaAKcaXxVCH1x8zaAFevFfWPhBokqtcRWYxw',
         }
     })
 
@@ -58,12 +58,13 @@ const cargarImagenAleatoria = () => {
 const cargarInformacion = () => {
     cargarImagenAleatoria()
     cargarGaleria()
+    cargarDesdeHistorial()  
     quoteImg.style.setProperty('--background-image', `url(${imageSrc})`)
     image.style = `background-image: url(${imageSrc})`
     quote.textContent = quoteText
     imageCollector.style.setProperty('--border-color', `${quoteColor}`)
     quoteImg.style = `background-image: url(${imageSrc})`
-    actualizarHistorialUI()
+    actualizarHistorial()
 }
 
 async function cargarDatos() {
@@ -73,6 +74,7 @@ async function cargarDatos() {
     cargarInformacion()
 }
 
+//Funcion para transformar de hexadecimal a rgb
 function hexToRgb(hex) {
     hex = hex.replace(/^#/, '')
     const bigint = parseInt(hex, 16)
@@ -121,28 +123,47 @@ const guardarHistorialEnLocalStorage = () => {
     localStorage.setItem("historial", JSON.stringify(historial))
 }
 
-const actualizarHistorialUI = () => {
-    while (historialList.firstChild) {
-        historialList.removeChild(historialList.firstChild)
+const actualizarHistorial = () => {
+    if (historial.length >= historialSize) {
+        historial.shift()
     }
-    historial.forEach((entry, index) => {
-        const listItem = document.createElement("li")
-        listItem.textContent = `${index + 1}. ${entry.quote}`
-        listItem.addEventListener("click", () => cargarDesdeHistorial(index))
-        historialList.appendChild(listItem)
-    })
+
+    let nuevoHistorial = {
+        "frase": quoteText,
+        "imagen": imageSrc
+    }
+
+    historial.push(nuevoHistorial)
+    guardarHistorialEnLocalStorage()
 }
 
-const cargarDesdeHistorial = (index) => {
-    const entry = historial[index]
-    quote.textContent = entry.quote
-    quoteImg.style.setProperty('--background-image', `url(${entry.image})`)
+const cargarDesdeHistorial = () => {
+    historialList.textContent = ""
+    let fragment = document.createDocumentFragment()
+
+    historial.forEach(hist => {
+        let li = document.createElement("li")
+        li.classList.add("historialList__list")
+
+        let img = document.createElement("IMG")
+        img.setAttribute("src", hist.imagen) // Corregir aquí
+        img.classList.add("historialList__img")
+
+        let p = document.createElement("P")
+        p.textContent = hist.frase
+        p.classList.add("historialList__p")
+
+        li.append(img)
+        li.append(p)
+        fragment.append(li)
+    })
+
+    historialList.append(fragment)
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    historialList = document.getElementById("historialList")
-    actualizarHistorialUI()
     cargarDatos()
+    cargarDesdeHistorial()
 })
 
 button.addEventListener("click", async () => {
@@ -152,3 +173,5 @@ button.addEventListener("click", async () => {
 form.addEventListener("submit", hacerBusqueda)
 
 imageCollector.addEventListener("click", cambiarFondo)
+
+window.addEventListener("beforeunload", guardarHistorialEnLocalStorage);

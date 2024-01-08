@@ -9,6 +9,15 @@
   src: url("../assets/fonts/cream_cake/Cream\ Cake.otf");
 }
 
+@font-face {
+  font-family: Softers;
+  src: url("../assets/fonts/Softers.otf");
+}
+@font-face {
+  font-family: Milk;
+  src: url("../assets/fonts/Milkalte.otf");
+}
+
 body {
   text-align: center;
   font-family: Arial, sans-serif;
@@ -17,14 +26,14 @@ body {
 
 .quote {
   /* margin: 20px 0; */
-  font-family: Cream;
+  font-family: Milk;
   margin-top: 0px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-transform: capitalize;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra con contraste */
   background-color: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente */
 
-  font-weight: lighter;
+  font-weight: 100;
 }
 
 .container {
@@ -174,6 +183,8 @@ body {
 
   transform: translateX(0);
   transition: all 1s;
+
+  overflow: hidden;
 }
 .dNone{
   display: none;
@@ -237,11 +248,49 @@ body {
 #historialList {
   list-style-type: none;
   padding: 0;
+  border: 1px solid white;
+  margin: 10px;
+  padding-top: 10px;
 }
 
-#historialList li {
-  cursor: pointer;
-  margin-bottom: 5px;
+.historialList__list {
+  margin-bottom: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.historialList__img{
+  width: 30%;
+}
+.historialList__p{
+  width: 60%;
+  color: white;
 }
 /*********END HISTORIAL*/
+.white{
+  color: white;
+  font-family: Cream;
+  font-weight: 100;
+  font-size: 3rem;
+  margin-bottom: -10px;
+}
+#button{
+  all: initial;
 
+  margin-top: 70px;
+  background-color: white;
+  border: 0;
+  /* width: 40px; */
+  border-radius: 10px;
+  height: 35px;
+  padding: 5px;
+  font-size: 1.5rem;
+  font-family: Cream;
+  box-shadow: 6px 10px 22px 5px rgba(0,0,0,0.75);
+
+  cursor: pointer;
+  transition: all .3s;
+}
+#button:hover{
+  background-color: rgba(240, 248, 255, 0.616);
+}

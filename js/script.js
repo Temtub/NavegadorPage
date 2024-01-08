@@ -31,7 +31,7 @@ async function cargarImagenes() {
 
     const pexelsResponse = await fetch(`https://api.pexels.com/v1/search?query=landscape&per_page=800`, {
         headers: {
-            "Authorization": 'Mf17YqB37QBAIr12LlJltaAKcaXxVCH1x8zaAFevFfWPhBokqtcRWYxw',
+            "Authorization": '',
         }
     })
 
